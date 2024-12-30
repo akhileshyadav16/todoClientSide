@@ -7,12 +7,15 @@ function CreateTask({ refresh, setRefresh }) {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+
     try {
+      console.log("base url in create to do:",process.env.REACT_APP_BASE_URL)
       const response = await fetch(`${process.env.REACT_APP_BASE_URL}/api/v1/createTodo`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
+      console.log("response in create to do :",response);
       if (response.ok) {
         toast.success("Task added in To-do List");
         setRefresh(!refresh);
@@ -21,6 +24,7 @@ function CreateTask({ refresh, setRefresh }) {
       }
     } catch (error) {
       console.log("onsubmit", error.message);
+
     }
   };
 
